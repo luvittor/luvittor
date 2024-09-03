@@ -29,7 +29,10 @@ Basic
 ![Code-Igniter](https://img.shields.io/badge/CodeIgniter-%23EF4223.svg?style=for-the-badge&logo=codeIgniter&logoColor=white) 
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) 
 ![Composer](https://img.shields.io/badge/composer-%23000000.svg?style=for-the-badge&logo=composer&logoColor=white)
-![Docket](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Clean Code](https://img.shields.io/badge/Clean%20Code-000000?style=for-the-badge&logo=cleancode&logoColor=white)
+![Solid](https://img.shields.io/badge/SOLID-000000?style=for-the-badge&logo=solid&logoColor=white)
+![Design Patterns](https://img.shields.io/badge/Design%20Patterns-000000?style=for-the-badge&logo=designpatterns&logoColor=white)
 
 ## 📊 GitHub Stats:
 ![](https://github-readme-stats.vercel.app/api?username=luvittor&theme=dark&hide_border=false&include_all_commits=true&count_private=false)<br/>
