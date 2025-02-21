@@ -33,6 +33,10 @@ Basic
 ![Clean Code](https://img.shields.io/badge/Clean%20Code-000000?style=for-the-badge&logo=cleancode&logoColor=white)
 ![Solid](https://img.shields.io/badge/SOLID-000000?style=for-the-badge&logo=solid&logoColor=white)
 ![Design Patterns](https://img.shields.io/badge/Design%20Patterns-000000?style=for-the-badge&logo=designpatterns&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Node.js](https://img.shields.io/badge/node.js-%2343853D.svg?style=for-the-badge&logo=node.js&logoColor=white)
+![AdonisJS](https://img.shields.io/badge/AdonisJS-220052?style=for-the-badge&logo=adonisjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 
 ## 📊 GitHub Stats:
 ![](https://github-readme-stats.vercel.app/api?username=luvittor&theme=dark&hide_border=false&include_all_commits=true&count_private=false)<br/>
