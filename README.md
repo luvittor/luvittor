@@ -18,6 +18,8 @@
 ![Collaborative Git](https://img.shields.io/badge/Collaborative%20Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![Claude Code](https://img.shields.io/badge/Claude%20Code-000000?style=for-the-badge&logo=anthropic&logoColor=white)
 ![AI-Assisted Development](https://img.shields.io/badge/AI--Assisted%20Development-5B5BD6?style=for-the-badge&logo=openai&logoColor=white)
+![Spec-Driven Development](https://img.shields.io/badge/Spec--Driven%20Development-6A5ACD?style=for-the-badge&logo=readthedocs&logoColor=white)
+![Codex](https://img.shields.io/badge/Codex-000000?style=for-the-badge&logo=openai&logoColor=white)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white) 
