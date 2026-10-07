@@ -15,15 +15,23 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Update latest articles
-        uses: gautamkrishnar/blog-post-workflow@v1
-        with:
-          feed_list: "https://luvittor.substack.com/feed"
-          max_post_count: 5
-          user_agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
-          accept_header: "application/rss+xml, application/xml, text/xml, */*"
-          retry_count: 3
-          retry_wait_time: 5
-          commit_message: "docs: update latest Substack articles"
+        env:
+          SUBSTACK_FEED_URL: "https://luvittor.substack.com/feed"
+          MAX_POST_COUNT: "5"
+        run: node .github/scripts/update-substack.mjs
+
+      - name: Commit README changes
+        run: |
+          if git diff --quiet -- README.md; then
+            echo "README is already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "docs: update latest Substack articles"
+          git push
