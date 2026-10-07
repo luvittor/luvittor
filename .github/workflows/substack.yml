@@ -22,4 +22,8 @@ jobs:
         with:
           feed_list: "https://luvittor.substack.com/feed"
           max_post_count: 5
+          user_agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+          accept_header: "application/rss+xml, application/xml, text/xml, */*"
+          retry_count: 3
+          retry_wait_time: 5
           commit_message: "docs: update latest Substack articles"
