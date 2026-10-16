@@ -19,7 +19,7 @@ jobs:
 
       - name: Update latest articles
         env:
-          SUBSTACK_FEED_URL: "https://luvittor.substack.com/feed"
+          SUBSTACK_FEED_URL: ${{ secrets.SUBSTACK_FEED_URL }}
           MAX_POST_COUNT: "5"
         run: node .github/scripts/update-substack.mjs
 

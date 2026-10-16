@@ -20,26 +20,26 @@ async function fetchFeed(url) {
 
     try {
       response = await fetch(url, {
-        headers: { Accept: "application/rss+xml, application/xml, text/xml" },
+        headers: { Accept: "application/json" },
         signal: AbortSignal.timeout(15_000),
       });
     } catch (error) {
       if (attempt === maxAttempts) {
         throw new Error(
-          `Failed to fetch Substack RSS feed after ${maxAttempts} attempts.`,
+          `Failed to fetch Substack posts after ${maxAttempts} attempts.`,
           { cause: error },
         );
       }
 
       console.warn(
-        `Substack RSS request failed (attempt ${attempt}/${maxAttempts}); retrying.`,
+        `Substack posts request failed (attempt ${attempt}/${maxAttempts}); retrying.`,
       );
       await delay(1000 * 2 ** (attempt - 1));
       continue;
     }
 
     if (response.ok) {
-      return response.text();
+      return response.json();
     }
 
     const isRetryable =
@@ -49,58 +49,29 @@ async function fetchFeed(url) {
 
     if (!isRetryable || attempt === maxAttempts) {
       throw new Error(
-        `Substack RSS feed returned HTTP ${response.status} after ${attempt} attempt(s).`,
+        `Substack posts endpoint returned HTTP ${response.status} after ${attempt} attempt(s).`,
       );
     }
 
     console.warn(
-      `Substack RSS feed returned HTTP ${response.status} (attempt ${attempt}/${maxAttempts}); retrying.`,
+      `Substack posts endpoint returned HTTP ${response.status} (attempt ${attempt}/${maxAttempts}); retrying.`,
     );
     await delay(1000 * 2 ** (attempt - 1));
   }
 
-  throw new Error("Substack RSS request ended without a response.");
+  throw new Error("Substack posts request ended without a response.");
 }
 
-function decodeXml(value) {
-  const entities = {
-    amp: "&",
-    apos: "'",
-    gt: ">",
-    lt: "<",
-    quot: '"',
-  };
+const endpoint = new URL(feedUrl);
+endpoint.searchParams.set("limit", String(maxPostCount));
 
-  return value
-    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
-    .replace(/&(#x[\da-f]+|#\d+|amp|apos|gt|lt|quot);/gi, (entity, code) => {
-      if (code[0] !== "#") {
-        return entities[code.toLowerCase()] ?? entity;
-      }
-
-      const isHex = code[1].toLowerCase() === "x";
-      const codePoint = Number.parseInt(code.slice(isHex ? 2 : 1), isHex ? 16 : 10);
-
-      return codePoint <= 0x10ffff
-        ? String.fromCodePoint(codePoint)
-        : entity;
-    });
-}
-
-function getTagValue(xml, tagName) {
-  const match = xml.match(
-    new RegExp(`<${tagName}\\b[^>]*>([\\s\\S]*?)<\\/${tagName}\\s*>`, "i"),
-  );
-
-  return match ? decodeXml(match[1].trim()) : "";
-}
-
-const feedXml = await fetchFeed(feedUrl);
-const items = [...feedXml.matchAll(/<item\b[^>]*>([\s\S]*?)<\/item\s*>/gi)];
-const posts = items.slice(0, maxPostCount).map(([, item]) => ({
-  title: getTagValue(item, "title") || "Untitled",
-  link: getTagValue(item, "link"),
-}));
+const data = await fetchFeed(endpoint);
+const posts = (Array.isArray(data.posts) ? data.posts : [])
+  .slice(0, maxPostCount)
+  .map((post) => ({
+    title: String(post.title ?? "").trim() || "Untitled",
+    link: String(post.link ?? ""),
+  }));
 
 if (posts.length === 0) {
   throw new Error("No Substack articles were returned.");
